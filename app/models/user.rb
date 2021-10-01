@@ -9,24 +9,22 @@ class User < ApplicationRecord
 	has_many :book_comments, dependent: :destroy
   attachment :profile_image, destroy: false
   
-  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
-  has_many :following_user, through: :follower, source: :followed
-  has_many :follower_user, through: :followed, source: :follower 
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :followers, through: :reverse_of_relationships, source: :follower
+  # 被フォロー関係を通じて参照→followed_idをフォローしている人
+
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  # 【class_name: "Relationship"】は省略可能
+  has_many :followings, through: :relationships, source: :followed
   
-    # ユーザーをフォローする
   def follow(user_id)
-    follower.create(followed_id: user_id)
+    relationships.create(followed_id: user_id)
   end
-
-  # ユーザーのフォローを外す
   def unfollow(user_id)
-    follower.find_by(followed_id: user_id).destroy
+    relationships.find_by(followed_id: user_id).destroy
   end
-
-  # フォローしていればtrueを返す
   def following?(user)
-    following_user.include?(user)
+    followings.include?(user)
   end
   
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
