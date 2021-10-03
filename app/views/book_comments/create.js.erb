@@ -1,0 +1,5 @@
+$("#book_comments").html("<%= j(render 'books/comment', book: @book, book_comment: @book_comment)%>");
+ <!--#=id+id_name-->
+$("textarea").val('')
+ <!--textareaはidを記述しなくてもいい-->
+$("#comment_count").html("<%= j(render "books/comment_count", book: @book)%>");
