@@ -7,6 +7,7 @@ class Book < ApplicationRecord
 
   validates :rate, presence: true
   validates :rate, numericality: {
+    #rateカラムでは整数のみ許可したい
     only_integer: true,
     less_than_or_equal_to: 5,
     greater_than_or_equal_to: 1,

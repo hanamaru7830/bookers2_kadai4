@@ -19,6 +19,20 @@
           <%= render "favorites/favorite-btn", book: book %>
         </td>
         <td>コメント数: <%= book.book_comments.count %></td>
+        <td id="star-rate-<%= book.id %>">
+          <script>
+            // 繰り返し処理でもidをidを一意にできるようにnote_idを入れる
+            $('#star-rate-<%= book.id %>').raty({
+              size: 36,
+              starOff:  '<%= asset_path('star-off.png') %>',
+              starOn : '<%= asset_path('star-on.png') %>',
+              // 読み込みだけで入力できない
+              readOnly: true,
+              //投稿された星の入力値を読み込む
+              score: <%= book.rate %>,
+            });
+          </script>
+        </td>
       </tr>
     <% end %>
   </tbody>
