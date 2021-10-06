@@ -13,6 +13,7 @@ class Book < ApplicationRecord
     greater_than_or_equal_to: 1,
   }
   
+  scope :latest, -> {order(updated_at: :desc)}
   
 	def favorited_by?(user)
 		favorites.where(user_id: user.id).exists?

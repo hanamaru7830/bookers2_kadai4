@@ -8,9 +8,14 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
     @book = Book.new
+    if params[:sort_update]
+      @books = Book.latest
+    else
+      @books = Book.all
+    end
   end
+
 
   def create
     @book = Book.new(book_params)
