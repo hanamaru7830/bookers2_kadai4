@@ -12,8 +12,10 @@ class Book < ApplicationRecord
     less_than_or_equal_to: 5,
     greater_than_or_equal_to: 1,
   }
-  
-  scope :latest, -> {order(updated_at: :desc)}
+  #new_upはオリジナルのメソッド名　orderは並び順を変更するメソッド　
+  #（カラム名： 並び順）
+  scope :new_up, -> {order(updated_at: :desc)}
+  scope :star_up, -> {order(rate: :desc)}
   
 	def favorited_by?(user)
 		favorites.where(user_id: user.id).exists?

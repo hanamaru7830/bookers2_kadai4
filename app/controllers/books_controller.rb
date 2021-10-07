@@ -10,7 +10,9 @@ class BooksController < ApplicationController
   def index
     @book = Book.new
     if params[:sort_update]
-      @books = Book.latest
+      @books = Book.new_up
+    elsif params[:sort_rate]
+      @books = Book.star_up
     else
       @books = Book.all
     end
