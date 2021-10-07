@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'searchs/search'
+  get "search" => "books#search"
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
@@ -9,11 +9,8 @@ Rails.application.routes.draw do
   resources :books, only: [:index, :show, :edit, :create, :destroy, :update] do
     resource :favorites, only: [:create, :destroy]
     resources :book_comments, only: [:create, :destroy]
-    collection do
-      get 'search'
-    end
-    
   end
+  
   resources :users, only: [:index, :show, :edit, :update] do
     resource :relationships, only: [:create, :destroy]
     get 'followings' => 'relationships#followings', as: 'followings'

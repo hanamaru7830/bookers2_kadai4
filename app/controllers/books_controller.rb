@@ -41,8 +41,8 @@ class BooksController < ApplicationController
   end
   
   def search
-    @books = Book.search(params[:search])
     @book = Book.new
+    @books = Book.search(params[:keyword])
   end
 
   private

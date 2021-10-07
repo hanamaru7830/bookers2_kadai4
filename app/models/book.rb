@@ -13,12 +13,8 @@ class Book < ApplicationRecord
     greater_than_or_equal_to: 0,
   }
   
-  def self.search(search)
-    if search != ""
-      Book.where(['category LIKE(?)', "%#{search}%"])
-    else
-      redirect_to "index"
-    end
+  def Book.search(search_word)
+    Book.where(['category LIKE ?', "#{search_word}"])
   end
   
 	def favorited_by?(user)
