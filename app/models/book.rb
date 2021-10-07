@@ -14,7 +14,7 @@ class Book < ApplicationRecord
   }
   #new_upはオリジナルのメソッド名　orderは並び順を変更するメソッド　
   #（カラム名： 並び順）
-  scope :new_up, -> {order(updated_at: :desc)}
+  scope :new_up, -> {order(created_at: :desc)}
   scope :star_up, -> {order(rate: :desc)}
   
 	def favorited_by?(user)
