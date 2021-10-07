@@ -12,7 +12,15 @@ class Book < ApplicationRecord
     less_than_or_equal_to: 5,
     greater_than_or_equal_to: 0,
   }
-
+  
+  def self.search(search)
+    if search != ""
+      Book.where(['category LIKE(?)', "%#{search}%"])
+    else
+      redirect_to "index"
+    end
+  end
+  
 	def favorited_by?(user)
 		favorites.where(user_id: user.id).exists?
 	end
