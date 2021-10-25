@@ -20,12 +20,12 @@ There is a follow/follow function for users.
 
 ## 環境 Requirement
 
-・ruby 2.6.3
-・rails 5.2.5
-・devise
-・bootstrap 4.5
-・jquery-rails
-・font-awesome-sass 5.13
+・ruby 2.6.3  
+・rails 5.2.5  
+・devise  
+・bootstrap 4.5  
+・jquery-rails  
+・font-awesome-sass 5.13  
 ## 作成情報 Author
 
 ・Hodaka Tachi
